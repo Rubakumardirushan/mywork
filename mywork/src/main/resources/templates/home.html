@@ -6,9 +6,15 @@
 <body>
     <h1>Welcome to the Home Page</h1>
     
-    <p>Hello, <span th:text="${username}"></span>!</p>
+    <p>Username: <span th:text="${username}"></span>!</p>
     <p>Email: <span th:text="${email}"></span></p>
-    <!-- You can display more user information here as needed -->
-    <a href="http://localhost:8080/login">logout</a>
+    <p>Name: <span th:text="${name}"></span></p>
+    <p>Contact Number: <span th:text="${contact}"></span></p>
+    <p>Country: <span th:text="${location}"></span></p>
+
+    <!-- Logout link -->
+    <form th:action="@{/logout}" method="post">
+        <button type="submit">Logout</button>
+    </form>
 </body>
 </html>

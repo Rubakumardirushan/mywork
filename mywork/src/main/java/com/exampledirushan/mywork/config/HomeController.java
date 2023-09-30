@@ -13,19 +13,25 @@ import org.springframework.ui.Model;
 @Controller
 public class HomeController {
 
-    @GetMapping("/")
-    public String hom() {
-        return "Hello, Home!";
-    }
+    
 
- @GetMapping("/secured")
+ @GetMapping("/")
 public String securedHome(@AuthenticationPrincipal OAuth2User user, Model model) {
     if (user != null) {
-        String username = user.getName(); // GitHub username
-        String email = user.getAttribute("name"); // GitHub user's email
+        String username = user.getAttribute("login"); // GitHub username
+        String email = user.getAttribute("email"); // GitHub user's email
+        String location = user.getAttribute("location"); 
+        if(email==null){
+            email="email is private";
+        }
+        if(username==null){
+            username=user.getAttribute("name"); 
+        }
         // Add more attributes as needed from the GitHub user object
         model.addAttribute("username", username);
         model.addAttribute("email", email);
+        model.addAttribute("location", location);
+    
     } else {
         // Handle the case where user is null, possibly by redirecting to an error page or login page.
         return "redirect:/login";
